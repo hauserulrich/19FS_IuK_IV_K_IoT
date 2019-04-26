@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Iot-Project</title>
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Condensed"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="title">IoT-Projekt 19FS</div>
+    </header>
+    <div class="container">
+      <div id="chart"></div>
+      <div class="settings">
+        <div class="row">
+          <div>Gerät:</div>
+          <select>
+              <option value="1">HTW Dach</option>
+              <option value="2">HTW Kreisel</option>
+              <option value="3">Gebäude 3</option>
+            </select>
+        </div>
+        <div class="row">
+          <div>Sensors:</div>
+          <div>
+            <input type="checkbox" name="vehicle1" value="Bike">Temparatur<br>
+            <input type="checkbox" name="vehicle1" value="Bike">CO2<br>
+            <input type="checkbox" name="vehicle1" value="Bike">Luftfeuchtigkeit<br>
+          </div>
+        </div>
+        <div class="row">
+          <div>Zeitspanne:</div>
+          <button>Test2</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script
+      src="https://unpkg.com/mqtt@2.18.8/dist/mqtt.min.js"
+      type="text/javascript"
+    ></script>
+    <script src="../javascript/index.js"></script>
+  </body>
+</html>

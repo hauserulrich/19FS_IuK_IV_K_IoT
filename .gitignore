@@ -67,4 +67,7 @@ server/conf/index.js
 server/node_modules
 
 
+#data
+server/data.json
+
 

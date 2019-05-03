@@ -67,10 +67,14 @@ form .row {
 }
 
 .flipRigth{
-    transform: rotate(-360deg);
+    transform: rotate(-720deg);
     transition-duration: 3s;
 }
 .flipLeft{
-    transform: rotate(360deg);
+    transform: rotate(720deg);
     transition-duration: 3s;
 }
+
+body {
+    background-image: url("../images/background.jpg");
+   }

@@ -21,32 +21,24 @@
         <form>
           <div class="row">
             <span>Device:</span><br />
-            <select>
-              <option value="1">HTW Dach</option>
-              <option value="2">HTW Kreisel</option>
-              <option value="3">Gebäude 3</option>
-            </select>
+            <div>
+              <input type="checkbox" value="HTW Dach" />HTW Dach<br />
+              <input type="checkbox" value="HTW Kreisel" />HTW Kreisel<br />
+              <input type="checkbox" value="Bike" />Gebäude 3<br />
+            </div>
           </div>
           <div class="row">
             <span>Sensor:</span>
             <div>
-              <input
-                type="checkbox"
-                name="vehicle1"
-                value="Bike"
-              />Temparatur<br />
-              <input type="checkbox" name="vehicle1" value="Bike" />CO2<br />
-              <input
-                type="checkbox"
-                name="vehicle1"
-                value="Bike"
-              />Luftfeuchtigkeit<br />
+              <input type="checkbox" value="temparatur" />Temparatur<br />
+              <input type="checkbox" value="co2" />CO2<br />
+              <input type="checkbox" value="luftf" />Luftfeuchtigkeit<br />
             </div>
           </div>
         </form>
       </div>
       <div>
-          <input id="slider" type="range" min="1" max="100" value="50">
+        <input id="slider" type="range" min="1" max="100" value="50" />
       </div>
     </div>
 

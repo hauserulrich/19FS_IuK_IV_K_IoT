@@ -85,11 +85,6 @@ function updateSlider(){
   var i = slider.value;
   y[4]=Number(i);
   console.log(x);
-  Plotly.update(CHART, [
-    {
-      x: x,
-      y: y
-    }
-  ], layout);
+  Plotly.update(CHART, data, layout);
 }
 //-----------------------------------------------------------------------------------------------

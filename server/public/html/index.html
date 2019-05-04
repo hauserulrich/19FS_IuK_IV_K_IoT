@@ -13,31 +13,32 @@
   </head>
   <body>
     <header>
-      <div class="title">IoT-Projekt 19FS</div>
+      <div class="title" onclick="flipIt()">IoT-Projekt 19FS</div>
     </header>
     <div class="container">
       <div id="chart"></div>
-      <div class="settings">
-        <div class="row">
-          <div>Gerät:</div>
-          <select>
-              <option value="1">HTW Dach</option>
-              <option value="2">HTW Kreisel</option>
-              <option value="3">Gebäude 3</option>
-            </select>
-        </div>
-        <div class="row">
-          <div>Sensors:</div>
-          <div>
-            <input type="checkbox" name="vehicle1" value="Bike">Temparatur<br>
-            <input type="checkbox" name="vehicle1" value="Bike">CO2<br>
-            <input type="checkbox" name="vehicle1" value="Bike">Luftfeuchtigkeit<br>
+      <div id="settings">
+        <form>
+          <div class="row">
+            <span>Device:</span><br />
+            <div>
+              <input type="checkbox" value="HTW Dach" />HTW Dach<br />
+              <input type="checkbox" value="HTW Kreisel" />HTW Kreisel<br />
+              <input type="checkbox" value="Bike" />Gebäude 3<br />
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div>Zeitspanne:</div>
-          <button>Test2</button>
-        </div>
+          <div class="row">
+            <span>Sensor:</span>
+            <div>
+              <input type="checkbox" value="temparatur" />Temparatur<br />
+              <input type="checkbox" value="co2" />CO2<br />
+              <input type="checkbox" value="luftf" />Luftfeuchtigkeit<br />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div>
+        <input id="slider" type="range" min="1" max="100" value="50" />
       </div>
     </div>
 

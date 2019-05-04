@@ -17,19 +17,28 @@ function onMessage(topic, message) {
 //-----------------------------------------------------------------------------------------------
 
 //---Plotly chart--------------------------------------------------------------------------------
-CHART = document.getElementById('chart');
+CHART = document.getElementById("chart");
 
+//layout the plot
 var layout = {
-  colorway : ['#86C232', '#86C232', '#222629', '#474B4F', '#6B6E70', '#6B6E70', '#6B6E70'],
+  colorway: [
+    "#86C232",
+    "#86C232",
+    "#222629",
+    "#474B4F",
+    "#6B6E70",
+    "#6B6E70",
+    "#6B6E70"
+  ],
   plot_bgcolor: "#474B4F",
   paper_bgcolor: "#474B4F",
   title: {
-    text:'Temparature',
+    text: "Temparature",
     font: {
-      family: 'Roboto Condensed, sans-serif',
+      family: "Roboto Condensed, sans-serif",
       size: 24,
       color: "white"
-    },
+    }
   },
   xaxis: {
     color: "white",
@@ -42,8 +51,40 @@ var layout = {
     linecolor: "white"
   }
 };
+//the actual data to plot
+var x = [1, 2, 3, 4, 5];
+var y = [0, 20, 100, 40, 50];
+var data= [
+  {
+    x: x,
+    y: y
+  }
+];
 
-Plotly.plot( CHART, [{
-x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-y: [1, 2, 4, 8, 16, 14, 6, 3, 3, 7, 10, 25, 30, 20, 15, 12, 12, 5, 7, 6] }], layout );
-//-------------------------------------------------------------------------------------------
+//make the plot
+Plotly.plot(
+  CHART,
+  data,
+  layout
+);
+//------------------------------------------------------------------------------------------------
+
+//---Own Functions--------------------------------------------------------------------------------
+function flipIt() {
+  document.getElementById("settings").classList.toggle("flipRigth");
+  document.getElementById("chart").classList.toggle("flipLeft");
+}
+
+var slider = document.getElementById("slider");
+slider.oninput = function() {
+  updateSlider();
+}
+
+
+function updateSlider(){
+  var i = slider.value;
+  y[4]=Number(i);
+  console.log(x);
+  Plotly.update(CHART, data, layout);
+}
+//-----------------------------------------------------------------------------------------------

@@ -45,36 +45,40 @@ function decodePayload(payload, port, metadata) {
   switch (port) {
     case 1: // GebäudeA
       let humidity = (payload[0] << 8) | payload[1];
-      let temperatur = (payload[2] << 8) | payload[3];
-      let temperaturs = { humidity, temperatur, time };
-      updateStoredData("1", temperaturs);
+      let temperature = (payload[2] << 8) | payload[3];
+      let data = { humidity, temperature, time };
+      updateStoredData("GebäudeA", data);
 
-      client.publish(
-        "htwchurwebofthings:gebäudea",
-        JSON.stringify(temperaturs)
-      );
+      client.publish("htwchurwebofthings:gebäudea", JSON.stringify(data));
       break;
-    case 2: // GebäudeB
-      let emissionsInside = (payload[0] << 8) | payload[1];
-      let emissionsOutside = (payload[2] << 8) | payload[3];
-      let emissions = { emissionsInside, emissionsOutside, time };
-      updateStoredData("2", emissions);
-      client.publish("htwchurwebofthings:gebäudeb", JSON.stringify(emissions));
-      break;
-    case 3: // Kreisel
-      let emissionsInside2 = (payload[0] << 8) | payload[1];
-      let emissionsOutside2 = (payload[2] << 8) | payload[3];
-      let emissions2 = { emissionsInside2, emissionsOutside2, time };
-      updateStoredData("3", emissions2);
-      client.publish("htwchurwebofthings:kreisel", JSON.stringify(emissions2));
-      break;
+    // case 2: // GebäudeB
+    //   let emissionsInside = (payload[0] << 8) | payload[1];
+    //   let emissionsOutside = (payload[2] << 8) | payload[3];
+    //   let emissions = { emissionsInside, emissionsOutside, time };
+    //   updateStoredData("2", emissions);
+    //   client.publish("htwchurwebofthings:gebäudeb", JSON.stringify(emissions));
+    //   break;
+    // case 3: // Kreisel
+    //   let emissionsInside2 = (payload[0] << 8) | payload[1];
+    //   let emissionsOutside2 = (payload[2] << 8) | payload[3];
+    //   let emissions2 = { emissionsInside2, emissionsOutside2, time };
+    //   updateStoredData("3", emissions2);
+    //   client.publish("htwchurwebofthings:kreisel", JSON.stringify(emissions2));
+    //   break;
   }
 }
 
-function updateStoredData(port, data) {
-  if (storedData[port].data.length === 10000)
-    storedData[port].data.splice(0, 1);
-  storedData[port].data.push(data);
+function updateStoredData(location, data) {
+  let { temperature, humidity, time } = data;
+  if (storedData[location].temperature.length === 10000)
+    storedData[location].temperature.splice(0, 1);
+  storedData[location].humidity.splice(0, 1);
+  storedData[location].time.splice(0, 1);
+
+  storedData[location].temperature.push(temperature);
+  storedData[location].humidity.push(humidity);
+  storedData[location].time.push(time);
+
   fs.writeFile(storedDataPath, JSON.stringify(storedData), "utf8");
 }
 

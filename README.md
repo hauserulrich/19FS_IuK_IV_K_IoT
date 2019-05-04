@@ -17,18 +17,9 @@ create a data.json inside of server/ with the following content:
 
 ```json
 {
-  "1": {
-    "location": "GebäudeA",
-    "data": []
-  },
-  "2": {
-    "location": "GebäudeB",
-    "data": []
-  },
-  "3": {
-    "location": "Kreisel",
-    "data": []
-  }
+  "GebäudeA": { "temperature": [], "humidity": [], "time": [] },
+  "GebäudeB": { "temperature": [], "humidity": [], "time": [] },
+  "Kreisel": { "temperature": [], "humidity": [], "time": [] }
 }
 ```
 

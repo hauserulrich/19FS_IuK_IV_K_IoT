@@ -37,9 +37,13 @@ header {
     margin-bottom: 2rem;
 }
 
+#chartsDiv{
+    width: 40%;
+}
+
 #settings{
 
-    width: 50%;
+    width: 40%;
     align-items: center;
     background-color: #474B4F;
     border-radius: 10px;

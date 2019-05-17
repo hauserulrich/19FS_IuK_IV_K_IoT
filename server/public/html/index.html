@@ -16,29 +16,30 @@
       <div class="title" onclick="flipIt()">IoT-Projekt 19FS</div>
     </header>
     <div class="container">
-      <div id="chart"></div>
+      <div id='chartsDiv'>
+        <div id="tempPlot"></div>
+        <div id="co2Plot"></div>
+        <div id="luftfPlot"></div>
+      </div>
       <div id="settings">
         <form>
           <div class="row">
-            <span>Device:</span><br />
-            <div>
-              <input type="checkbox" value="HTW Dach" />HTW Dach<br />
-              <input type="checkbox" value="HTW Kreisel" />HTW Kreisel<br />
-              <input type="checkbox" value="Bike" />Gebäude 3<br />
-            </div>
-          </div>
-          <div class="row">
             <span>Sensor:</span>
-            <div>
-              <input type="checkbox" value="temparatur" />Temparatur<br />
-              <input type="checkbox" value="co2" />CO2<br />
-              <input type="checkbox" value="luftf" />Luftfeuchtigkeit<br />
+            <div id='plotBoxes'>
+              <input type="checkbox" onclick="checkPlots()" value="tempPlot" checked/>Temparatur<br />
+              <input type="checkbox" onclick="checkPlots()" value="co2Plot" checked/>CO2<br />
+              <input type="checkbox" onclick="checkPlots()" value="luftfPlot" checked/>Luftfeuchtigkeit<br />
+            </div>
+            <div class="row">
+              <span>Device:</span><br />
+              <div id='graphBoxes'>
+                <input type="checkbox" onclick="checkGraphs()" value="htwDach" />HTW Dach<br />
+                <input type="checkbox" onclick="checkGraphs()" value="htwKreisel" />HTW Kreisel<br />
+                <input type="checkbox" onclick="checkGraphs()" value="gebaude3" />Gebäude 3<br />
+              </div>
             </div>
           </div>
         </form>
-      </div>
-      <div>
-        <input id="slider" type="range" min="1" max="100" value="50" />
       </div>
     </div>
 

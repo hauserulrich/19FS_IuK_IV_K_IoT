@@ -4,6 +4,7 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
     font-weight: bold;
+    /* background-image: url("../images/6452.jpg"); */
 }
 
 header {
@@ -30,9 +31,8 @@ header {
     margin: 3em 5% 0 5%;
 }
 
-#chart {
-    width: 50%;
-    height: 500px;
+#chartsDiv > div {
+    margin: 0 0 2rem 0;
 }
 
 #settings{
@@ -74,7 +74,3 @@ form .row {
     transform: rotate(720deg);
     transition-duration: 3s;
 }
-
-body {
-    background-image: url("../images/background.jpg");
-   }

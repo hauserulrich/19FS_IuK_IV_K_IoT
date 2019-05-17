@@ -43,13 +43,25 @@ var tempLayout = {
     range:[0,11],
     color: "white",
     showline: true,
-    linecolor: "white"
+    linecolor: "white",
+    title: 'Time',
+    titlefont: {
+      family: 'Roboto Condensed, sans-serif',
+      size: 14,
+      color: 'white'
+    },
   },
   yaxis: {
     range:[0,100],
     color: "white",
     showline: true,
-    linecolor: "white"
+    linecolor: "white",
+    title: 'Temparature in C',
+    titlefont: {
+      family: 'Roboto Condensed, sans-serif',
+      size: 14,
+      color: 'lightgrey'
+    },
   }
 };
 

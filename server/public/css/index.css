@@ -8,7 +8,7 @@ body {
 }
 
 header {
-    width: 100%;
+    width: 90%;
     height: 40px;
     background-color: #61892F; 
     display: flex;
@@ -25,6 +25,7 @@ header {
 
 .container{
     width: 90%;
+    max-width: 1400px;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -35,19 +36,18 @@ header {
 
 #chartsDiv > div {
     margin-bottom: 2rem;
+    width: 100%;
 }
 
 #chartsDiv{
-    width: 40%;
+    width: 70%;
 }
 
 #settings{
-
-    width: 40%;
+    width: 20%;
     align-items: center;
     background-color: #474B4F;
     border-radius: 10px;
-    padding: 50px;
     margin-bottom: 2rem;
 }
 
@@ -62,8 +62,21 @@ button:hover, select:hover {
     background-color: #61892F;
 }
 
+form {
+    padding: 50px;
+}
+
 form .row {
     margin: 1rem 0 1rem 0;
+}
+
+div > input {
+    margin-top: 0.5rem;
+}
+
+span {
+    font-size: 1.2rem;
+    color: #86C232;
 }
 
 .flipRigth{

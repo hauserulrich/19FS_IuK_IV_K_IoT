@@ -40,11 +40,13 @@ var tempLayout = {
     }
   },
   xaxis: {
+    range:[0,11],
     color: "white",
     showline: true,
     linecolor: "white"
   },
   yaxis: {
+    range:[0,100],
     color: "white",
     showline: true,
     linecolor: "white"
@@ -186,18 +188,18 @@ function updatePlot(chart){
 
 var counter = 0;
 window.setInterval(function(){
-  counter+=0.05;
-  y[1]= 100
-  y[2]= Math.sin(counter+2*counter)*50+50;
-  y[3]= Math.sin(counter+3*counter)*50+50;
-  y[4]= Math.sin(counter+4*counter)*50+50;
-  y[5]= Math.sin(counter+5*counter)*50+50;
-  y[6]= Math.sin(counter+6*counter)*50+50;
-  y[7]= Math.sin(counter+7*counter)*50+50;
-  y[8]= Math.sin(counter+8*counter)*50+50;
-  y[9]= Math.sin(counter+9*counter)*50+50;
-  y[10]= Math.sin(counter+10*counter)*50+50;
+  counter+=0.1;
+  adder= 0.4;
+  y[0]= Math.sin(counter+0*adder)*50+50;
+  y[1]= Math.sin(counter+1*adder)*50+50;
+  y[2]= Math.sin(counter+2*adder)*50+50;
+  y[3]= Math.sin(counter+3*adder)*50+50;
+  y[4]= Math.sin(counter+4*adder)*50+50;
+  y[5]= Math.sin(counter+5*adder)*50+50;
+  y[6]= Math.sin(counter+6*adder)*50+50;
+  y[7]= Math.sin(counter+7*adder)*50+50;
+  y[8]= Math.sin(counter+8*adder)*50+50;
+  y[9]= Math.sin(counter+9*adder)*50+50;
+  y[10]= Math.sin(counter+10*adder)*50+50;
   updatePlot('tempPlot');
-  updatePlot('co2Plot');
-  updatePlot('luftfPlot');
-}, 10);
+}, 20);

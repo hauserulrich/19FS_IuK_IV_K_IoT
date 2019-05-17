@@ -187,6 +187,17 @@ function updatePlot(chart){
 var counter = 0;
 window.setInterval(function(){
   counter+=0.05;
-  y[4]= Math.sin(counter)*50+50;
+  y[1]= 100
+  y[2]= Math.sin(counter+2*counter)*50+50;
+  y[3]= Math.sin(counter+3*counter)*50+50;
+  y[4]= Math.sin(counter+4*counter)*50+50;
+  y[5]= Math.sin(counter+5*counter)*50+50;
+  y[6]= Math.sin(counter+6*counter)*50+50;
+  y[7]= Math.sin(counter+7*counter)*50+50;
+  y[8]= Math.sin(counter+8*counter)*50+50;
+  y[9]= Math.sin(counter+9*counter)*50+50;
+  y[10]= Math.sin(counter+10*counter)*50+50;
   updatePlot('tempPlot');
+  updatePlot('co2Plot');
+  updatePlot('luftfPlot');
 }, 10);

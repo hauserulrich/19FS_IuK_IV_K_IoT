@@ -16,6 +16,28 @@ function onMessage(topic, message) {
 }
 //-----------------------------------------------------------------------------------------------
 
+
+//---DATA input----------------------------------------------------------------------------------------
+dummyData = {
+  'GebäudeA': {
+    'temperature': [31, 11, 57, 40, 3, 80, 58, 82, 38, 6, 74, 90, 22, 84, 100, 93, 42, 5, 78, 96],
+    'humidity': [58, 21, 97, 48, 66, 17, 47, 71, 70, 96, 50, 22, 84, 40, 28, 67, 95, 41, 75, 83],
+    'time': []
+  },
+  'GebäudeB': {
+    'temperature': [22, 34, 9, 95, 35, 37, 63, 14, 100, 3, 73, 10, 57, 89, 17, 81, 43, 13, 36, 25],
+    'humidity': [11, 38, 22, 41, 26, 65, 95, 32, 39, 2, 74, 31, 47, 27, 99, 35, 9, 20, 36, 34],
+    'time': []
+  },
+  'Kreisel': {
+    'temperature': [67, 82, 95, 52, 85, 51, 21, 71, 74, 49, 58, 98, 57, 42, 23, 47, 84, 99, 77, 19],
+    'humidity': [22, 52, 10, 91, 42, 15, 95, 58, 83, 70, 45, 50, 27, 13, 62, 47, 85, 25, 21, 87],
+    'time': []
+  }
+}
+//-----------------------------------------------------------------------------------------------
+
+
 //---Plotly chart--------------------------------------------------------------------------------
 
 //layout the plot
@@ -40,7 +62,7 @@ var tempLayout = {
     }
   },
   xaxis: {
-    range:[0,11],
+    range: [0, 11],
     color: "white",
     showline: true,
     linecolor: "white",
@@ -52,7 +74,7 @@ var tempLayout = {
     },
   },
   yaxis: {
-    range:[0,100],
+    range: [0, 100],
     color: "white",
     showline: true,
     linecolor: "white",
@@ -157,20 +179,20 @@ function flipIt() {
 function checkPlots() {
   var boxes = document.querySelectorAll('#plotBoxes > input');
   for (var i = 0; i < boxes.length; i++) {
-    if(boxes[i].checked){
+    if (boxes[i].checked) {
       addChart(boxes[i].value)
-    }else{
+    } else {
       removeChart(boxes[i].value)
     }
   }
 }
 
-function checkGraphs(){
+function checkGraphs() {
   var graphs = document.querySelectorAll('#graphBoxes > input');
   for (var i = 0; i < graphs.length; i++) {
-    if(graphs[i].checked){
+    if (graphs[i].checked) {
       addGraph(graphs[i].value)
-    }else{
+    } else {
       removeGraph(graphs[i].value)
     }
   }
@@ -185,33 +207,33 @@ function removeChart(chart) {
   document.getElementById(chart).style.display = 'none';
 }
 
-function addGraph(graph){
+function addGraph(graph) {
   console.log("add Graph: " + graph);
 }
 
-function removeGraph(graph){
+function removeGraph(graph) {
   console.log("remove Graph: " + graph);
 }
 
 //UPDATE PLOTS
-function updatePlot(chart){
+function updatePlot(chart) {
   Plotly.update(document.getElementById(chart), data, tempLayout);
 }
 
 var counter = 0;
-window.setInterval(function(){
-  counter+=0.1;
-  adder= 0.4;
-  y[0]= Math.sin(counter+0*adder)*50+50;
-  y[1]= Math.sin(counter+1*adder)*50+50;
-  y[2]= Math.sin(counter+2*adder)*50+50;
-  y[3]= Math.sin(counter+3*adder)*50+50;
-  y[4]= Math.sin(counter+4*adder)*50+50;
-  y[5]= Math.sin(counter+5*adder)*50+50;
-  y[6]= Math.sin(counter+6*adder)*50+50;
-  y[7]= Math.sin(counter+7*adder)*50+50;
-  y[8]= Math.sin(counter+8*adder)*50+50;
-  y[9]= Math.sin(counter+9*adder)*50+50;
-  y[10]= Math.sin(counter+10*adder)*50+50;
+window.setInterval(function () {
+  counter += 0.1;
+  adder = 0.4;
+  y[0] = Math.sin(counter + 0 * adder) * 50 + 50;
+  y[1] = Math.sin(counter + 1 * adder) * 50 + 50;
+  y[2] = Math.sin(counter + 2 * adder) * 50 + 50;
+  y[3] = Math.sin(counter + 3 * adder) * 50 + 50;
+  y[4] = Math.sin(counter + 4 * adder) * 50 + 50;
+  y[5] = Math.sin(counter + 5 * adder) * 50 + 50;
+  y[6] = Math.sin(counter + 6 * adder) * 50 + 50;
+  y[7] = Math.sin(counter + 7 * adder) * 50 + 50;
+  y[8] = Math.sin(counter + 8 * adder) * 50 + 50;
+  y[9] = Math.sin(counter + 9 * adder) * 50 + 50;
+  y[10] = Math.sin(counter + 10 * adder) * 50 + 50;
   updatePlot('tempPlot');
 }, 20);

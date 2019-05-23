@@ -39,7 +39,7 @@ Um einen Licence Key zu bekommen, muss man sich [bei Heltec anmelden](https://re
 Beim TTN muss ein neues Device registriert werden.
 
 ###Eintragen der Registrierung
-Iin \libraries\ESP32_LoRaWAN-master\src in der Arduino IDE
+Iin `\libraries\ESP32_LoRaWAN-master\src` in der Arduino IDE
 
 #### Commissioning.h
 
@@ -84,5 +84,6 @@ Nach dem Start sollte bei TTN alle Minute ein Datenpaket eingehen
 		* APPLICATION_EUI `{ 0x70, 0xB3, 0xD5, 0x7E, 0xD0, 0x01, 0xB2, 0xAF }`
 		* APPLICATION_KEY `{ 0xBE, 0xDE, 0x6F, 0x9C, 0x92, 0xA6, 0xA5, 0xA6, 0x9D, 0x9D, 0x48, 0xCC, 0x4B, 0x3B, 0x20, 0x6B }`
 	
-		
+### Sketches lauffähig machen
+Im Verzeichnis HW sind Arduino-Sketches abgelegt, die den registrierten Knoten entsprechen. Im Wurzelverzeichnis des Modules steht eine CommissioningX.h-Datei, die in `\libraries\ESP32_LoRaWAN-master\src` kopiert werden muss, damit die Arduino IDE das findet.
 

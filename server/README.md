@@ -7,21 +7,11 @@ IoT-Projekt HTW Chur 2019, Frühjahrssemester
 ### env variables
 
 #### the things network
+before you can start the server, you need following parameters from your The Things Network application
 
 - TTN_APPID
 - TTN_ACCESSKEY
 
-## dataStorage
-
-create a data.json inside of server/ with the following content:
-
-```json
-{
-  "GebäudeA": { "temperature": [], "humidity": [], "time": [] },
-  "GebäudeB": { "temperature": [], "humidity": [], "time": [] },
-  "Kreisel": { "temperature": [], "humidity": [], "time": [] }
-}
-```
 
 ## start server
 

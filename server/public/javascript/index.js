@@ -15,11 +15,12 @@ function onMessage(topic, message) {
   console.log("topic: " + topic + ", message: " + message);
 }
 //-----------------------------------------------------------------------------------------------
+//get Data
+//fetch data once, data = fetch()
 
 //make the plot
-Plotly.plot(document.getElementById("tempPlot"), tempData, tempLayout);
-Plotly.plot(document.getElementById("co2Plot"), co2Data, co2Layout);
-Plotly.plot(document.getElementById("luftfPlot"), humidityData, luftfLayout);
+firstPlot()
+
 //Plotly.update(CHART, data, layout);
 
 //------------------------------------------------------------------------------------------------

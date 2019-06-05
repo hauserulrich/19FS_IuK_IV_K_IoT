@@ -101,13 +101,10 @@ var layout = {
 
 //the actual data to plot
 function firstPlot(data){
-  var data = dummyData   //delete this line later
-
-  var sensorArray = ['tempPlot', 'co2Plot', 'luftfPlot']
+  var sensorArray = ['tempPlot'] //'co2Plot', 'luftfPlot']
+  console.log(data)
 
   for (i of sensorArray){
-    console.log(i)
-   
     var trace1 = {
       x: data.iuk_lora_01.data.time,
       y: data.iuk_lora_01.data.temperature,

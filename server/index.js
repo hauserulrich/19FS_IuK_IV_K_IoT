@@ -51,7 +51,7 @@ function decodePayload(payload) {
 
   client.publish(
     "htwchurwebofthings:newData",
-    JSON.stringify({ dev_id: { data } })
+    JSON.stringify({ [dev_id]: { data } })
   );
 }
 

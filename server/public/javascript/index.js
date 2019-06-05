@@ -7,19 +7,24 @@ client.on("message", onMessage);
 
 function onConnected() {
   console.log("connected to broker " + urlBroker);
-  client.subscribe("silvanknecht:temperatures");
-  client.subscribe("silvanknecht:emissions");
+  client.subscribe("htwchurwebofthings:newData");
 }
 
 function onMessage(topic, message) {
-  console.log("topic: " + topic + ", message: " + message);
+  console.log("new MQTT message:")
+  console.log(JSON.parse(message));
+  //{"iuk_lora_01":{"data":{"humidity":44461,"temperature":0,"co2":34,"time":"2019-06-05T16:29:00.74462403Z"}}}
 }
 //-----------------------------------------------------------------------------------------------
 //get Data
-//fetch data once, data = fetch()
 
-//make the plot
-firstPlot()
+fetch('http://localhost:2222/api/v1/data')
+  .then(response => response.json())
+  .then(data => {
+    firstPlot(data)
+  }
+).catch(error => console.error(error))
+
 
 //Plotly.update(CHART, data, layout);
 

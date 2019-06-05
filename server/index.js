@@ -12,6 +12,8 @@ app.use("/", express.static("public"));
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname + "/public/html/index.html"))
 );
+
+// route to fetch all stored Data
 app.get("/api/v1/data", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*"); // for cors
   res.header("Access-Control-Allow-Headers", "*"); // for cors
@@ -19,7 +21,7 @@ app.get("/api/v1/data", (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`App listening on port ${port}!`));
 
 const appID = process.env.TTN_APPID;
 const accessKey = process.env.TTN_ACCESSKEY;
@@ -29,61 +31,58 @@ data(appID, accessKey)
   .then(function(client) {
     client.on("uplink", function(devID, payload) {
       console.log("Received uplink from ", devID);
-
-      console.log(payload);
-      decodePayload(payload.payload_raw, payload.port, payload.metadata);
+      decodePayload(payload);
     });
   })
   .catch(function(err) {
-    console.error(err);
+    console.error("Connection to TTN failed", err);
     process.exit(1);
   });
 
-function decodePayload(payload, port, metadata) {
+function decodePayload(payload) {
+  let { payload_raw, metadata, dev_id } = payload;
   let time = metadata.time;
-  // the case represents the port
-  switch (port) {
-    case 1: // GebäudeA
-      let humidity = (payload[0] << 8) | payload[1];
-      let temperature = (payload[2] << 8) | payload[3];
-      let data = { humidity, temperature, time };
-      updateStoredData("GebäudeA", data);
 
-      client.publish("htwchurwebofthings:gebäudea", JSON.stringify(data));
-      break;
-    // case 2: // GebäudeB
-    //   let emissionsInside = (payload[0] << 8) | payload[1];
-    //   let emissionsOutside = (payload[2] << 8) | payload[3];
-    //   let emissions = { emissionsInside, emissionsOutside, time };
-    //   updateStoredData("2", emissions);
-    //   client.publish("htwchurwebofthings:gebäudeb", JSON.stringify(emissions));
-    //   break;
-    // case 3: // Kreisel
-    //   let emissionsInside2 = (payload[0] << 8) | payload[1];
-    //   let emissionsOutside2 = (payload[2] << 8) | payload[3];
-    //   let emissions2 = { emissionsInside2, emissionsOutside2, time };
-    //   updateStoredData("3", emissions2);
-    //   client.publish("htwchurwebofthings:kreisel", JSON.stringify(emissions2));
-    //   break;
+  let humidity = (payload_raw[0] << 8) | payload_raw[1];
+  let temperature = (payload_raw[2] << 8) | payload_raw[3];
+  let co2 = 34; //TODO: which bits are co2?
+  let data = { humidity, temperature, co2, time };
+  updateStoredData(dev_id, data);
+
+  client.publish(
+    "htwchurwebofthings:newData",
+    JSON.stringify({ dev_id: { data } })
+  );
+}
+
+function updateStoredData(dev_id, data) {
+  let { temperature, humidity, co2, time } = data;
+
+  // constrain size of storage json
+  if (storedData[dev_id].data.time.length === 10000) {
+    storedData[dev_id].data.temperature.splice(0, 1);
+    storedData[dev_id].data.humidity.splice(0, 1);
+    storedData[dev_id].data.time.splice(0, 1);
   }
+
+  storedData[dev_id].data.temperature.push(temperature);
+  storedData[dev_id].data.humidity.push(humidity);
+  storedData[dev_id].data.co2.push(co2);
+  storedData[dev_id].data.time.push(time);
+
+  fs.writeFile(
+    storedDataPath,
+    JSON.stringify(storedData),
+    "utf8",
+    (data, err) => {
+      if (err) {
+        console.log("Error during file writing: ", err);
+      }
+    }
+  );
 }
 
-function updateStoredData(location, data) {
-  let { temperature, humidity, time } = data;
-  if (storedData[location].temperature.length === 10000)
-    storedData[location].temperature.splice(0, 1);
-  storedData[location].humidity.splice(0, 1);
-  storedData[location].time.splice(0, 1);
-
-  storedData[location].temperature.push(temperature);
-  storedData[location].humidity.push(humidity);
-  storedData[location].time.push(time);
-
-  fs.writeFile(storedDataPath, JSON.stringify(storedData), "utf8");
-}
-
-//** MQTT **/
-
+//** MQTT **//
 const urlBroker = "mqtt://broker.hivemq.com";
 const mqtt = require("mqtt");
 const client = mqtt.connect(urlBroker);
@@ -91,6 +90,5 @@ const client = mqtt.connect(urlBroker);
 client.on("connect", onConnected);
 
 function onConnected() {
-  // after the connection has been established send all stored data to the client
   console.log("connected to broker " + urlBroker);
 }

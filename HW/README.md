@@ -41,4 +41,5 @@ Text goes here.
 #### Send Data via LoRaWAN
 Text goes here.
 ## Sources
-- The Nodes were set up with help from [Robot Zero One](https://robotzero.one/heltec-lora32-lorawan-node/)
+- Gateway was set up with help [From zero to LoRaWAN in a weekend](https://github.com/ttn-zh/ic880a-gateway/wiki). 
+- Nodes were set up with help from [Robot Zero One](https://robotzero.one/heltec-lora32-lorawan-node/)

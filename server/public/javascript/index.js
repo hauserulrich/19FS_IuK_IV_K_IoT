@@ -7,19 +7,25 @@ client.on("message", onMessage);
 
 function onConnected() {
   console.log("connected to broker " + urlBroker);
-  client.subscribe("silvanknecht:temperatures");
-  client.subscribe("silvanknecht:emissions");
+  client.subscribe("htwchurwebofthings:newData");
 }
 
 function onMessage(topic, message) {
-  console.log("topic: " + topic + ", message: " + message);
+  console.log("new MQTT message:")
+  console.log(JSON.parse(message));
+  //{"iuk_lora_01":{"data":{"humidity":44461,"temperature":0,"co2":34,"time":"2019-06-05T16:29:00.74462403Z"}}}
 }
 //-----------------------------------------------------------------------------------------------
+//get Data
 
-//make the plot
-Plotly.plot(document.getElementById("tempPlot"), tempData, tempLayout);
-Plotly.plot(document.getElementById("co2Plot"), co2Data, co2Layout);
-Plotly.plot(document.getElementById("luftfPlot"), humidityData, luftfLayout);
+fetch('http://localhost:2222/api/v1/data')
+  .then(response => response.json())
+  .then(data => {
+    firstPlot(data)
+  }
+).catch(error => console.error(error))
+
+
 //Plotly.update(CHART, data, layout);
 
 //------------------------------------------------------------------------------------------------

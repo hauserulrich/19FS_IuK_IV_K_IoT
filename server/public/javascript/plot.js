@@ -1,60 +1,3 @@
-//---DATA input----------------------------------------------------------------------------------------
-const dummyData = 
-  {
-    'iuk_lora_01': {
-      'info'  : {
-        'name': 'Zimmer1',
-      },
-      'data': {
-        'temperature': [31, 11, 57, 40, 3, 80, 58, 82, 38, 6, 74, 90, 22, 84, 100, 93, 42, 5, 78, 96],
-        'humidity': [58, 21, 97, 48, 66, 17, 47, 71, 70, 96, 50, 22, 84, 40, 28, 67, 95, 41, 75, 83],
-        'co2': [11, 38, 22, 41, 26, 65, 95, 32, 39, 2, 74, 31, 47, 27, 99, 35, 9, 20, 36, 34],
-        'time': ['2019-10-04 00:00:00', '2019-10-04 01:00:00', '2019-10-04 02:00:00', '2019-10-04 03:00:00', '2019-10-04 04:00:00', '2019-10-04 05:00:00', '2019-10-04 06:00:00', '2019-10-04 07:00:00', '2019-10-04 08:00:00', '2019-10-04 09:00:00', '2019-10-04 10:00:00', '2019-10-04 11:00:00', '2019-10-04 12:00:00', '2019-10-04 13:00:00', '2019-10-04 14:00:00', '2019-10-04 15:00:00', '2019-10-04 16:00:00', '2019-10-04 17:00:00', '2019-10-04 18:00:00', '2019-10-04 19:00:00', '2019-10-04 20:00:00']
-      }
-    },
-    'iuk_lora_02': {
-      'info'  : {
-        'name': 'Zimmer2',
-      },
-      'data': {
-        'temperature': [96, 46, 29, 18, 4, 58, 34, 33, 89, 98, 31, 37, 11, 50, 64, 19, 45, 84, 36, 32],
-        'humidity': [34, 40, 73, 36, 52, 1, 12, 58, 48, 32, 35, 70, 94, 25, 31, 4, 80, 8, 37, 42],
-        'co2': [75, 43, 82, 28, 71, 77, 25, 58, 31, 7, 73, 39, 62, 9, 60, 3, 14, 50, 54, 88],
-        'time': ['2019-10-04 00:00:00', '2019-10-04 01:00:00', '2019-10-04 02:00:00', '2019-10-04 03:00:00', '2019-10-04 04:00:00', '2019-10-04 05:00:00', '2019-10-04 06:00:00', '2019-10-04 07:00:00', '2019-10-04 08:00:00', '2019-10-04 09:00:00', '2019-10-04 10:00:00', '2019-10-04 11:00:00', '2019-10-04 12:00:00', '2019-10-04 13:00:00', '2019-10-04 14:00:00', '2019-10-04 15:00:00', '2019-10-04 16:00:00', '2019-10-04 17:00:00', '2019-10-04 18:00:00', '2019-10-04 19:00:00', '2019-10-04 20:00:00']
-      }
-    },
-    'iuk_lora_03': {
-      'info'  : {
-        'name': 'Kreisel',
-      },
-      'data': {
-        'temperature': [69, 24, 82, 4, 92, 29, 78, 96, 39, 40, 90, 50, 19, 95, 70, 45, 11, 54, 83, 86],
-        'humidity': [58, 21, 97, 48, 66, 17, 47, 71, 70, 96, 50, 22, 84, 40, 28, 67, 95, 41, 75, 83],
-        'co2': [11, 38, 22, 41, 26, 65, 95, 32, 39, 2, 74, 31, 47, 27, 99, 35, 9, 20, 36, 34],
-        'time': ['2019-10-04 00:00:00', '2019-10-04 01:00:00', '2019-10-04 02:00:00', '2019-10-04 03:00:00', '2019-10-04 04:00:00', '2019-10-04 05:00:00', '2019-10-04 06:00:00', '2019-10-04 07:00:00', '2019-10-04 08:00:00', '2019-10-04 09:00:00', '2019-10-04 10:00:00', '2019-10-04 11:00:00', '2019-10-04 12:00:00', '2019-10-04 13:00:00', '2019-10-04 14:00:00', '2019-10-04 15:00:00', '2019-10-04 16:00:00', '2019-10-04 17:00:00', '2019-10-04 18:00:00', '2019-10-04 19:00:00', '2019-10-04 20:00:00']
-      }
-    },
-    'iuk_lora_04': {
-      'info'  : {
-        'name': 'HTW-Dach',
-      },
-      'data': {
-        'temperature': [79, 56, 81, 24, 47, 74, 35, 46, 82, 48, 18, 34, 49, 23, 52, 43, 28, 53, 91, 65],
-        'humidity': [58, 21, 97, 48, 66, 17, 47, 71, 70, 96, 50, 22, 84, 40, 28, 67, 95, 41, 75, 83],
-        'co2': [11, 38, 22, 41, 26, 65, 95, 32, 39, 2, 74, 31, 47, 27, 99, 35, 9, 20, 36, 34],
-        'time': ['2019-10-04 00:00:00', '2019-10-04 01:00:00', '2019-10-04 02:00:00', '2019-10-04 03:00:00', '2019-10-04 04:00:00', '2019-10-04 05:00:00', '2019-10-04 06:00:00', '2019-10-04 07:00:00', '2019-10-04 08:00:00', '2019-10-04 09:00:00', '2019-10-04 10:00:00', '2019-10-04 11:00:00', '2019-10-04 12:00:00', '2019-10-04 13:00:00', '2019-10-04 14:00:00', '2019-10-04 15:00:00', '2019-10-04 16:00:00', '2019-10-04 17:00:00', '2019-10-04 18:00:00', '2019-10-04 19:00:00', '2019-10-04 20:00:00']
-      }
-    } 
-  }
-
-
-// iterate over json
-for (var i in dummyData){
-  console.log(dummyData[i].info.name)   //call every name
-  console.log(dummyData[i].data.temperature)   //call temperature array
-}
-//-----------------------------------------------------------------------------------------------
-
 //---Plotly chart--------------------------------------------------------------------------------
 //Layout template
 var layout = {
@@ -98,38 +41,37 @@ var layout = {
   }
 };
 
-
 //the actual data to plot
 function firstPlot(data){
-  var sensorArray = ['tempPlot'] //'co2Plot', 'luftfPlot']
-  console.log(data)
+  var plotTitles =  ["Temparature", "CO2", "Humidity"]
+  var yaxisTitles = ["Temparature in °C", "Co2 in ppm", "Humidity in %"]
+  var sensorArray = ['tempPlot', 'co2Plot', 'luftfPlot']
+  var sensorData1Array = [data.iuk_lora_01.data.temperature, data.iuk_lora_01.data.co2, data.iuk_lora_01.data.humidity]
+  var sensorData2Array = [data.iuk_lora_02.data.temperature, data.iuk_lora_02.data.co2, data.iuk_lora_02.data.humidity]
+  var sensorData3Array = [data.iuk_lora_03.data.temperature, data.iuk_lora_03.data.co2, data.iuk_lora_03.data.humidity]
 
-  for (i of sensorArray){
+
+  for (i in sensorArray){
     var trace1 = {
       x: data.iuk_lora_01.data.time,
-      y: data.iuk_lora_01.data.temperature,
-      name: 'Zimmer1'
+      y: sensorData1Array[i],
+      name:'<span style="color:white">'+ data.iuk_lora_01.info.name +'</span>'
     }
     var trace2 = {
       x: data.iuk_lora_02.data.time,
-      y: data.iuk_lora_02.data.temperature,
-      name: 'Zimmer2'
+      y: sensorData2Array[i],
+      name: '<span style="color:white">'+data.iuk_lora_02.info.name +'</span>'
     }
     var trace3 = {
       x: data.iuk_lora_03.data.time,
-      y: data.iuk_lora_03.data.temperature,
-      name: 'Kreisel'
+      y: sensorData3Array[i],
+      name: '<span style="color:white">'+data.iuk_lora_03.info.name+'</span>'
     }
 
     var plotData = [trace1, trace2, trace3];
-    layout.title.text = "Temparature"
-    layout.yaxis.title = "Temparature in °C"
+    layout.title.text = plotTitles[i]
+    layout.yaxis.title = yaxisTitles[i]
 
-    Plotly.plot(document.getElementById("tempPlot"), plotData, layout);
-  //Plotly.plot(document.getElementById("co2Plot"), co2Data, co2Layout);
-  //lotly.plot(document.getElementById("luftfPlot"), humidityData, luftfLayout);
-
-  //var co2Data = [trace1, trace2];
-  //var humidityData = [trace1, trace2];
+    Plotly.plot(document.getElementById(sensorArray[i]), plotData, layout);
   }
 }

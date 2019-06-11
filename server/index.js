@@ -43,11 +43,12 @@ function decodePayload(payload) {
   let { payload_raw, metadata, dev_id } = payload;
   let time = metadata.time;
   let payload_ascii = String(payload_raw);
-
-
-  let humidity = Number(payload_ascii.split(4,5));
-  let temperature = Number(payload_ascii.split(0,2) +"."+payload_ascii.split(3,3));
-  let co2 = Number(payload_ascii.split(7,8));
+  let humidity = Number(payload_ascii.substring(4, 6));
+  console.log("humidity", humidity);
+  let temperature = payload_ascii.substring(0, 4) / 10;
+  console.log("temperature", temperature);
+  let co2 = payload_ascii.substring(7, 10) * 100;
+  console.log("co2", co2);
   let data = { humidity, temperature, co2, time };
   updateStoredData(dev_id, data);
 

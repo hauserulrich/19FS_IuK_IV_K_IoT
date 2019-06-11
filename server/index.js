@@ -42,10 +42,12 @@ data(appID, accessKey)
 function decodePayload(payload) {
   let { payload_raw, metadata, dev_id } = payload;
   let time = metadata.time;
+  let payload_ascii = String(payload_raw);
 
-  let humidity = (payload_raw[0] << 8) | payload_raw[1];
-  let temperature = (payload_raw[2] << 8) | payload_raw[3];
-  let co2 = 34; //TODO: which bits are co2?
+
+  let humidity = Number(payload_ascii.split(4,5));
+  let temperature = Number(payload_ascii.split(0,2) +"."+payload_ascii.split(3,3));
+  let co2 = Number(payload_ascii.split(7,8));
   let data = { humidity, temperature, co2, time };
   updateStoredData(dev_id, data);
 

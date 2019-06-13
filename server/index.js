@@ -48,18 +48,29 @@ function decodePayload(payload) {
   let temperature = payload_ascii.substring(0, 4) / 10;
   console.log("temperature", temperature);
   let co2 = payload_ascii.substring(7, 10) * 100;
-  console.log("co2", co2);
+  console.log("co2", typeof co2);
   let data = { humidity, temperature, co2, time };
 
-  try {
-    updateStoredData(dev_id, data);
+  if (
+    typeof co2 === "number" &&
+    typeof humidity === "number" &&
+    typeof temperature === "number"
+  ) {
+    try {
+      updateStoredData(dev_id, data);
 
-    client.publish(
-      "htwchurwebofthings:newData",
-      JSON.stringify({ [dev_id]: { data } })
+      client.publish(
+        "htwchurwebofthings:newData",
+        JSON.stringify({ [dev_id]: { data } })
+      );
+    } catch (error) {
+      console.log("Updating Storage not possible: ", error);
+    }
+  } else {
+    console.log(
+      "Something with the was wrong with the payload: ",
+      payload_ascii
     );
-  } catch (error) {
-    console.log("Updating Storage not possible: ", error);
   }
 }
 

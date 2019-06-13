@@ -78,23 +78,3 @@ function addGraph(graph) {
 function removeGraph(graph) {
   console.log("remove Graph: " + graph);
 }
-
-//UPDATE PLOTS
-function updatePlots(nodeName, xData, yDataArray) {
-  //update temparature trace
-  if(yDataArray[0] != null){
-    Plotly.extendTraces(document.getElementById('tempPlot'), {y: [[yDataArray[0]]]}, [0])
-    console.log("updating trace 0 in temparature plot")
-  }
-  //update co2 trace
-  if(yDataArray[1] != null){
-    Plotly.extendTraces(document.getElementById('co2Plot'), {y: [[yDataArray[1]]]}, [1])
-    console.log("updating trace 1 in co2 plot")
-  }
-  //update humidity trace
-  if(yDataArray[2] != null){
-    Plotly.extendTraces(document.getElementById('luftPlot'), {y: [[yDataArray[2]]]}, [2])
-    console.log("updating trace 2 in humidityPlot")
-  }
-  //0: temparature, 1: co2, 2:humidity
-}

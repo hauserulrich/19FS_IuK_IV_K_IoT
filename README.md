@@ -4,7 +4,7 @@ IoT-Projekt HTW Chur 2019, Frühjahrssemester
 ## Introduction
 This project was made by students at the [NTB](http://ntb.ch) as a semester project.
 The purpose of this project is to get used to the Internet of Things.
-We could decice the functionality of the Things by ourself, so we decided to implement multiple weather stations that are placed on different locations.
+We could decide the functionality of the Things by ourself, so we decided to implement multiple weather stations that are placed on different locations.
 Each weather station measures the following values:
 - Temperature
 - Humidity

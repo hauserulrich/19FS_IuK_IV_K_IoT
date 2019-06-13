@@ -35,11 +35,20 @@ The following libraries are used:
 - Adafruit SGP30 for gas sensor
 - Adafruit Si7021 for temperature & humidity sensor
 
-#### Read Sensor Data
-Text goes here.
+[wot-sketch.ino](wot-sketch.ino) is based on ESP32_LoRaWAN/OTAA Example which can be found as soon as ESP32_LoRaWAN is installed.
+Sensor data is read by methods "updateTemp", "updateHum" and "updateGas" in [wot-sketch.ino](wot-sketch.ino)
+Sensor data is written to "Appdata" Array in [Commisioning.c](Commissioning.c) which sends them via LoRaWAN to the gateway.
 
-#### Send Data via LoRaWAN
-Text goes here.
+#### Process
+1. Bootup
+2. Gas sensor calibration (Approximately 20 sec)
+3. Initialize LoRaWAN (Join to TTN)
+4. Read out Sensor data
+5. Prepare Payload
+6. Send Payload to TTN
+7. Start deepsleep mode (Approximately 60 sec)
+8. After 60 sec start over with step 1
+
 ## Sources
 - Gateway was set up with help [From zero to LoRaWAN in a weekend](https://github.com/ttn-zh/ic880a-gateway/wiki). 
 - Nodes were set up with help from [Robot Zero One](https://robotzero.one/heltec-lora32-lorawan-node/)

@@ -18,7 +18,7 @@ function onMessage(topic, message) {
 //-----------------------------------------------------------------------------------------------
 //get Data
 
-fetch(process.env.API_LINK)
+fetch('https://htw-chur-wot.herokuapp.com/api/v1/data')
   .then(response => response.json())
   .then(data => {
     firstPlot(data)

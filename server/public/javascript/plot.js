@@ -84,9 +84,15 @@ function firstPlot(data){
 
 //Update plots (shoots on every mqtt message)
 function updatePlots(nodeName, xData, yDataArray) {
+  console.log('----------UpdatePlot---------')
+  console.log('Node: '+nodeName)
+  console.log(xData)
+  console.log(yDataArray)
+  console.log('-----------------------------')
+
   const nodeArray = ['iuk_lora_01', 'iuk_lora_02', 'iuk_lora_03', 'iuk_lora_04']
   const index = nodeArray.indexOf(nodeName)
-  if(index==-1){return}
+  if(index==-1){return} //stop if node is not in array
   //update temparature trace
   if(yDataArray[0] != null){
     Plotly.extendTraces(document.getElementById('tempPlot'), {y: [[yDataArray[0]]], x: [[xData]]}, [index])
@@ -94,12 +100,12 @@ function updatePlots(nodeName, xData, yDataArray) {
   }
   //update co2 trace
   if(yDataArray[1] != null){
-    Plotly.extendTraces(document.getElementById('co2Plot'), {y: [[yDataArray[1]]]}, [index])
+    Plotly.extendTraces(document.getElementById('co2Plot'), {y: [[yDataArray[1]]], x: [[xData]]}, [index])
     console.log("updating trace "+index+" in co2 plot")
   }
   //update humidity trace
   if(yDataArray[2] != null){
-    Plotly.extendTraces(document.getElementById('luftfPlot'), {y: [[yDataArray[2]]]}, [index])
+    Plotly.extendTraces(document.getElementById('luftfPlot'), {y: [[yDataArray[2]]], x: [[xData]]}, [index])
     console.log("updating trace "+index+" in humidityPlot")
   }
   //0: temparature, 1: co2, 2:humidity

@@ -54,11 +54,14 @@ function decodePayload(payload) {
   if (
     typeof co2 === "number" &&
     typeof humidity === "number" &&
-    typeof temperature === "number"
+    typeof temperature === "number" &&
+    String(co2) !== "NaN" &&
+    String(humidity) !== "NaN" &&
+    String(temperature) !== "NaN"
   ) {
+    console.log("Data is stored!");
     try {
       updateStoredData(dev_id, data);
-
       client.publish(
         "htwchurwebofthings:newData",
         JSON.stringify({ [dev_id]: { data } })
@@ -68,7 +71,7 @@ function decodePayload(payload) {
     }
   } else {
     console.log(
-      "Something with the was wrong with the payload: ",
+      "Something was wrong with the payload: ",
       payload_ascii
     );
   }

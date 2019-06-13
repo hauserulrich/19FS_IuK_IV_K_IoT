@@ -1,9 +1,10 @@
 //---Plotly chart--------------------------------------------------------------------------------
 //Layout template
-var layout = {
+const layout = {
   colorway: [
       "#86C232",
       "#328e0e",
+      "#d7e8da",
       "#000000"
   ],
   plot_bgcolor: "#474B4F",
@@ -40,17 +41,29 @@ var layout = {
     },
   }
 };
+//make deep copys of the layout for all plots
+var tempLayout = JSON.parse(JSON.stringify(layout));
+var co2Layout = JSON.parse(JSON.stringify(layout));
+var humLayout = JSON.parse(JSON.stringify(layout));
 
 //Make the plots after the fetch from the api
 function firstPlot(data){
   var plotTitles =  ["Temparature", "CO2", "Humidity"]
   var yaxisTitles = ["Temparature in °C", "Co2 in ppm", "Humidity in %"]
   var sensorArray = ['tempPlot', 'co2Plot', 'luftfPlot']
+  let layoutArray = [tempLayout, co2Layout, humLayout]
+  const nodeArray = ['iuk_lora_01','iuk_lora_02','iuk_lora_03','iuk_lora_04']
   var sensorData1Array = [data.iuk_lora_01.data.temperature, data.iuk_lora_01.data.co2, data.iuk_lora_01.data.humidity]
   var sensorData2Array = [data.iuk_lora_02.data.temperature, data.iuk_lora_02.data.co2, data.iuk_lora_02.data.humidity]
   var sensorData3Array = [data.iuk_lora_03.data.temperature, data.iuk_lora_03.data.co2, data.iuk_lora_03.data.humidity]
   var sensorData4Array = [data.iuk_lora_04.data.temperature, data.iuk_lora_04.data.co2, data.iuk_lora_04.data.humidity]
 
+  //set name of nodes to the checkboxes !!!!!!!!!!!!!!!!!!!!!TUT NICHT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  for (i of nodeArray){
+    console.log(i)
+    let txt = document.createTextNode(''+i);
+    document.getElementById(i).appendChild(txt);
+  }
 
   for (i in sensorArray){
     var trace1 = {
@@ -74,11 +87,10 @@ function firstPlot(data){
       name: '<span style="color:white">'+data.iuk_lora_04.info.name+'</span>'
     }
 
-    var plotData = [trace1, trace2, trace3, trace4];
-    layout.title.text = plotTitles[i]
-    layout.yaxis.title = yaxisTitles[i]
-
-    Plotly.plot(document.getElementById(sensorArray[i]), plotData, layout);
+    const plotData = [trace1, trace2, trace3, trace4];
+    layoutArray[i].title.text = plotTitles[i]
+    layoutArray[i].yaxis.title = yaxisTitles[i]
+    Plotly.plot(document.getElementById(sensorArray[i]), plotData, layoutArray[i]);
   }
 }
 

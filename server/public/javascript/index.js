@@ -18,7 +18,7 @@ function onMessage(topic, message) {
 //-----------------------------------------------------------------------------------------------
 //get Data
 
-fetch('http://localhost:2222/api/v1/data')
+fetch(process.env.API_LINK)
   .then(response => response.json())
   .then(data => {
     firstPlot(data)

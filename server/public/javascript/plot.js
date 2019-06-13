@@ -28,7 +28,7 @@ var layout = {
     },
   },
   yaxis: {
-    range: [0, 100],
+    //range: [0, 100],
     color: "white",
     showline: true,
     linecolor: "white",

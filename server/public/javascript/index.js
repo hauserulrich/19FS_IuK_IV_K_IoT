@@ -12,22 +12,24 @@ function onConnected() {
 
 function onMessage(topic, message) {
   console.log("new MQTT message:")
-  console.log(JSON.parse(message));
-  //{"iuk_lora_01":{"data":{"humidity":44461,"temperature":0,"co2":34,"time":"2019-06-05T16:29:00.74462403Z"}}}
+  const json = JSON.parse(message)
+  console.log(json)
+  const nodeName = Object.keys(json)[0]
+  const xData = json[nodeName].data.time
+  const yDataArray = [json[nodeName].data.temperature, json[nodeName].data.co2, json[nodeName].data.humidity]
+  updatePlots(nodeName, xData, yDataArray)
 }
 //-----------------------------------------------------------------------------------------------
-//get Data
 
-fetch('https://htw-chur-wot.herokuapp.com/api/v1/data')
+//---GET DATA------------------------------------------------------------------------------------
+//const url = 'https://htw-chur-wot.herokuapp.com/api/v1/data'
+const url = 'http://localhost:2222/api/v1/data'
+fetch(url)
   .then(response => response.json())
   .then(data => {
     firstPlot(data)
   }
 ).catch(error => console.error(error))
-
-
-//Plotly.update(CHART, data, layout);
-
 //------------------------------------------------------------------------------------------------
 
 //---Own Functions--------------------------------------------------------------------------------
@@ -78,6 +80,21 @@ function removeGraph(graph) {
 }
 
 //UPDATE PLOTS
-function updatePlot(chart) {
-  Plotly.update(document.getElementById(chart), data, tempLayout);
+function updatePlots(nodeName, xData, yDataArray) {
+  //update temparature trace
+  if(yDataArray[0] != null){
+    Plotly.extendTraces(document.getElementById('tempPlot'), {y: [[yDataArray[0]]]}, [0])
+    console.log("updating trace 0 in temparature plot")
+  }
+  //update co2 trace
+  if(yDataArray[1] != null){
+    Plotly.extendTraces(document.getElementById('co2Plot'), {y: [[yDataArray[1]]]}, [1])
+    console.log("updating trace 1 in co2 plot")
+  }
+  //update humidity trace
+  if(yDataArray[2] != null){
+    Plotly.extendTraces(document.getElementById('luftPlot'), {y: [[yDataArray[2]]]}, [2])
+    console.log("updating trace 2 in humidityPlot")
+  }
+  //0: temparature, 1: co2, 2:humidity
 }

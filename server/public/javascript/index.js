@@ -12,22 +12,24 @@ function onConnected() {
 
 function onMessage(topic, message) {
   console.log("new MQTT message:")
-  console.log(JSON.parse(message));
-  //{"iuk_lora_01":{"data":{"humidity":44461,"temperature":0,"co2":34,"time":"2019-06-05T16:29:00.74462403Z"}}}
+  const json = JSON.parse(message)
+  console.log(json)
+  const nodeName = Object.keys(json)[0]
+  const xData = json[nodeName].data.time
+  const yDataArray = [json[nodeName].data.temperature, json[nodeName].data.co2, json[nodeName].data.humidity]
+  updatePlots(nodeName, xData, yDataArray)
 }
 //-----------------------------------------------------------------------------------------------
-//get Data
 
-fetch('http://localhost:2222/api/v1/data')
+//---GET DATA------------------------------------------------------------------------------------
+//const url = 'https://htw-chur-wot.herokuapp.com/api/v1/data'
+const url = 'http://localhost:2222/api/v1/data'
+fetch(url)
   .then(response => response.json())
   .then(data => {
     firstPlot(data)
   }
 ).catch(error => console.error(error))
-
-
-//Plotly.update(CHART, data, layout);
-
 //------------------------------------------------------------------------------------------------
 
 //---Own Functions--------------------------------------------------------------------------------
@@ -75,9 +77,4 @@ function addGraph(graph) {
 
 function removeGraph(graph) {
   console.log("remove Graph: " + graph);
-}
-
-//UPDATE PLOTS
-function updatePlot(chart) {
-  Plotly.update(document.getElementById(chart), data, tempLayout);
 }

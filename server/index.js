@@ -8,7 +8,7 @@ var fs = require("fs");
 
 const app = express();
 
-app.use("/", express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname + "/public/html/index.html"))
 );
@@ -42,17 +42,37 @@ data(appID, accessKey)
 function decodePayload(payload) {
   let { payload_raw, metadata, dev_id } = payload;
   let time = metadata.time;
-
-  let humidity = (payload_raw[0] << 8) | payload_raw[1];
-  let temperature = (payload_raw[2] << 8) | payload_raw[3];
-  let co2 = 34; //TODO: which bits are co2?
+  let payload_ascii = String(payload_raw);
+  console.log("Ascii Payload: ", payload_ascii);
+  let humidity = Number(payload_ascii.substring(4, 6).replace(/[^0-9]/g));
+  console.log("humidity", humidity);
+  let temperature = payload_ascii.substring(0, 4) / 10;
+  console.log("temperature", temperature);
+  let co2 = Number(payload_ascii.substring(6, 11).replace(/[^0-9]/g, ""));
+  console.log("co2", co2);
   let data = { humidity, temperature, co2, time };
-  updateStoredData(dev_id, data);
 
-  client.publish(
-    "htwchurwebofthings:newData",
-    JSON.stringify({ [dev_id]: { data } })
-  );
+  if (
+    typeof co2 === "number" &&
+    typeof humidity === "number" &&
+    typeof temperature === "number" &&
+    String(co2) !== "NaN" &&
+    String(humidity) !== "NaN" &&
+    String(temperature) !== "NaN"
+  ) {
+    console.log("Data is stored!");
+    try {
+      updateStoredData(dev_id, data);
+      client.publish(
+        "htwchurwebofthings:newData",
+        JSON.stringify({ [dev_id]: { data } })
+      );
+    } catch (error) {
+      console.log("Updating Storage not possible: ", error);
+    }
+  } else {
+    console.log("Something was wrong with the payload: ", payload_ascii);
+  }
 }
 
 function updateStoredData(dev_id, data) {

@@ -34,6 +34,7 @@ The following libraries are used:
 - ESP32_LoRaWAN for node
 - Adafruit SGP30 for gas sensor
 - Adafruit Si7021 for temperature & humidity sensor
+
 [wot-sketch.ino](wot-sketch.ino) is based on ESP32_LoRaWAN/OTAA Example which can be found as soon as ESP32_LoRaWAN is installed.
 Sensor data is read by methods "updateTemp", "updateHum" and "updateGas" in [wot-sketch.ino](wot-sketch.ino)
 Sensor data is written to "Appdata" Array in [Commisioning.c](Commissioning.c) which sends them via LoRaWAN to the gateway.

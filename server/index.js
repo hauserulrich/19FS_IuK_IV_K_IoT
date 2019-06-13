@@ -65,7 +65,7 @@ function decodePayload(payload) {
       updateStoredData(dev_id, data);
       client.publish(
         "htwchurwebofthings:newData",
-        JSON.stringify({ [dev_id]: { data } })
+        JSON.stringify({ [dev_id]: { data } }, { qos: 2 })
       );
     } catch (error) {
       console.log("Updating Storage not possible: ", error);

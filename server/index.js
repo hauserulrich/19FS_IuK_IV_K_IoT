@@ -48,7 +48,7 @@ function decodePayload(payload) {
   let temperature = payload_ascii.substring(0, 4) / 10;
   console.log("temperature", temperature);
   let co2 = Number(payload_ascii.substring(6, 11));
-  console.log("co2", typeof co2);
+  console.log("co2", co2);
   let data = { humidity, temperature, co2, time };
 
   if (

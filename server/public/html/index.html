@@ -26,16 +26,17 @@
           <div class="row">
             <span>Sensors:</span>
             <div id='plotBoxes'>
-              <input type="checkbox" onclick="checkPlots()" value="tempPlot" checked/>Temparatur<br />
+              <input type="checkbox" onclick="checkPlots()" value="tempPlot" checked/>Temperature<br />
               <input type="checkbox" onclick="checkPlots()" value="co2Plot" checked/>CO2<br />
-              <input type="checkbox" onclick="checkPlots()" value="luftfPlot" checked/>Luftfeuchtigkeit<br />
+              <input type="checkbox" onclick="checkPlots()" value="luftfPlot" checked/>Humidity<br />
             </div>
             <div class="row">
               <span>Devices:</span><br />
               <div id='graphBoxes'>
-                <input type="checkbox" onclick="checkGraphs()" value="htwDach" checked/>HTW Dach<br />
-                <input type="checkbox" onclick="checkGraphs()" value="htwKreisel" checked/>HTW Kreisel<br />
-                <input type="checkbox" onclick="checkGraphs()" value="gebaude3" checked/>Gebäude 3<br />
+                <input id="iuk_lora_01" type="checkbox" onclick="checkGraphs()" value="lora1" checked/>iuk_lora_01<br />
+                <input id="iuk_lora_02" type="checkbox" onclick="checkGraphs()" value="lora2" checked/>iuk_lora_02<br />
+                <input id="iuk_lora_03" type="checkbox" onclick="checkGraphs()" value="lora3" checked/>iuk_lora_03<br />
+                <input id="iuk_lora_04" type="checkbox" onclick="checkGraphs()" value="lora4" checked/>iuk_lora_04<br />
               </div>
             </div>
           </div>

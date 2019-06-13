@@ -8,7 +8,7 @@ var fs = require("fs");
 
 const app = express();
 
-app.use("/", express.static("public"));
+app.use(express.static(__dirname+"/public"));
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname + "/public/html/index.html"))
 );
@@ -47,19 +47,33 @@ function decodePayload(payload) {
   console.log("humidity", humidity);
   let temperature = payload_ascii.substring(0, 4) / 10;
   console.log("temperature", temperature);
-  let co2 = payload_ascii.substring(7, 10) * 100;
+  let co2 = Number(payload_ascii.substring(6, 11));
   console.log("co2", co2);
   let data = { humidity, temperature, co2, time };
 
-  try {
-    updateStoredData(dev_id, data);
-
-    client.publish(
-      "htwchurwebofthings:newData",
-      JSON.stringify({ [dev_id]: { data } })
+  if (
+    typeof co2 === "number" &&
+    typeof humidity === "number" &&
+    typeof temperature === "number" &&
+    String(co2) !== "NaN" &&
+    String(humidity) !== "NaN" &&
+    String(temperature) !== "NaN"
+  ) {
+    console.log("Data is stored!");
+    try {
+      updateStoredData(dev_id, data);
+      client.publish(
+        "htwchurwebofthings:newData",
+        JSON.stringify({ [dev_id]: { data } })
+      );
+    } catch (error) {
+      console.log("Updating Storage not possible: ", error);
+    }
+  } else {
+    console.log(
+      "Something was wrong with the payload: ",
+      payload_ascii
     );
-  } catch (error) {
-    console.log("Updating Storage not possible: ", error);
   }
 }
 

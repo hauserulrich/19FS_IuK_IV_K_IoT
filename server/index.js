@@ -50,12 +50,17 @@ function decodePayload(payload) {
   let co2 = payload_ascii.substring(7, 10) * 100;
   console.log("co2", co2);
   let data = { humidity, temperature, co2, time };
-  updateStoredData(dev_id, data);
 
-  client.publish(
-    "htwchurwebofthings:newData",
-    JSON.stringify({ [dev_id]: { data } })
-  );
+  try {
+    updateStoredData(dev_id, data);
+
+    client.publish(
+      "htwchurwebofthings:newData",
+      JSON.stringify({ [dev_id]: { data } })
+    );
+  } catch (error) {
+    console.log("Updating Storage not possible: ", error);
+  }
 }
 
 function updateStoredData(dev_id, data) {

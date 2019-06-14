@@ -90,7 +90,7 @@ function updateStoredData(dev_id, data) {
   storedData[dev_id].data.co2.push(co2);
   storedData[dev_id].data.time.push(time);
 
-  fs.writeFile(
+  fs.writeFileSync(
     storedDataPath,
     JSON.stringify(storedData),
     "utf8",

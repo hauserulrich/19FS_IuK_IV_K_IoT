@@ -40,11 +40,11 @@ header {
 }
 
 #chartsDiv{
-    width: 70%;
+    width: 1000px;
 }
 
 #settings{
-    width: 20%;
+    width: 250px;
     align-items: center;
     background-color: #474B4F;
     border-radius: 10px;
@@ -87,3 +87,9 @@ span {
     transform: rotate(720deg);
     transition-duration: 3s;
 }
+
+@media screen and (max-width: 1135px) {
+    #chartsDiv{
+        width: 100%;
+    }
+  }

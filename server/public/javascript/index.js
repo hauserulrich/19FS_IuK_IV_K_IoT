@@ -52,12 +52,12 @@ function checkPlots() {
 }
 
 function checkGraphs() {
-  var graphs = document.querySelectorAll('#graphBoxes > input');
-  for (var i = 0; i < graphs.length; i++) {
-    if (graphs[i].checked) {
-      addGraph(graphs[i].value)
+  var boxes = document.querySelectorAll('#graphBoxes > input');
+  for (var i = 0; i < boxes.length; i++) {
+    if (boxes[i].checked) {
+      addGraph(i)
     } else {
-      removeGraph(graphs[i].value)
+      removeGraph(i)
     }
   }
 }
@@ -71,10 +71,17 @@ function removeChart(chart) {
   document.getElementById(chart).style.display = 'none';
 }
 
-function addGraph(graph) {
-  console.log("add Graph: " + graph);
+function addGraph(i) {
+  for (plot of myPlots){
+    plot.data[i].visible = true;
+    Plotly.extendTraces(plot, {y: [[]]}, [i])
+  }
 }
 
-function removeGraph(graph) {
-  console.log("remove Graph: " + graph);
+function removeGraph(i) {
+  for (plot of myPlots){
+    plot.data[i].visible = false;
+    Plotly.extendTraces(plot, {y: [[]]}, [i])
+  }
 }
+//-----------------------------------------------------------------------------------------------

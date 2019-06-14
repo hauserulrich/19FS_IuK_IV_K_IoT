@@ -1,3 +1,7 @@
+//const url = 'https://htw-chur-wot.herokuapp.com/api/v1/data'
+const url = 'http://silvanknecht.ch/api/v1/data'
+//const url = 'http://localhost:2222/api/v1/data'
+
 //---MQTT----------------------------------------------------------------------------------------
 const urlBroker = "ws://broker.hivemq.com:8000/mqtt";
 var client = mqtt.connect(urlBroker);
@@ -22,8 +26,6 @@ function onMessage(topic, message) {
 //-----------------------------------------------------------------------------------------------
 
 //---GET DATA------------------------------------------------------------------------------------
-//const url = 'https://htw-chur-wot.herokuapp.com/api/v1/data'
-const url = 'http://localhost:2222/api/v1/data'
 fetch(url)
   .then(response => response.json())
   .then(data => {

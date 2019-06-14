@@ -1,16 +1,19 @@
-const { data, application } = require("ttn");
+const { data } = require("ttn");
 const express = require("express");
 const path = require("path");
 
 const storedDataPath = "./data.json";
-const storedData = require(storedDataPath);
 const fs = require("fs");
 
 const app = express();
 
 app.use(express.static(__dirname + "/public"));
 app.use(function(req, res, next) {
-  let allowedOrigins = ["http://silvanknecht.ch", "http://silviojaeger.ch", "http://localhost:2222"];
+  let allowedOrigins = [
+    "http://silvanknecht.ch",
+    "http://silviojaeger.ch",
+    "http://localhost:2222"
+  ];
   let origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
     res.setHeader("Access-Control-Allow-Origin", origin);
@@ -92,10 +95,9 @@ function updateStoredData(dev_id, data) {
 
   // constrain size of storage json
   if (dataToUpdate[dev_id].data.time.length === 10000) {
-    dataToUpdate[dev_id].data.temperature.splice(0, 1);
-    dataToUpdate[dev_id].data.humidity.splice(0, 1);
-    dataToUpdate[dev_id].data.co2.splice(0, 1);
-    dataToUpdate[dev_id].data.time.splice(0, 1);
+    for (let prop in dataToUpdate[dev_id].data) {
+      dataToUpdate[dev_id].data[prop].splice(0, 1);
+    }
   }
 
   dataToUpdate[dev_id].data.temperature.push(temperature);

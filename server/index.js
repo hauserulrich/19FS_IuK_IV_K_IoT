@@ -9,6 +9,15 @@ const fs = require("fs");
 const app = express();
 
 app.use(express.static(__dirname + "/public"));
+app.use(function(req, res, next) {
+  let allowedOrigins = ["http://silvanknecht.ch", "http://silviojaeger.ch", "http://localhost:2222"];
+  let origin = req.headers.origin;
+  if (allowedOrigins.indexOf(origin) > -1) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Methods", "GET");
+  return next();
+});
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname + "/public/html/index.html"))
 );

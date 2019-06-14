@@ -4,7 +4,7 @@ const path = require("path");
 
 const storedDataPath = "./data.json";
 const storedData = require(storedDataPath);
-var fs = require("fs");
+const fs = require("fs");
 
 const app = express();
 
@@ -17,7 +17,10 @@ app.get("/", (req, res) =>
 app.get("/api/v1/data", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*"); // for cors
   res.header("Access-Control-Allow-Headers", "*"); // for cors
-  res.json(storedData);
+  console.log("All Data requested!");
+  let rawdata = fs.readFileSync(storedDataPath);
+  let dataToSend = JSON.parse(rawdata);
+  res.json(dataToSend);
 });
 
 const port = process.env.PORT || 3000;
@@ -76,23 +79,26 @@ function decodePayload(payload) {
 }
 
 function updateStoredData(dev_id, data) {
+  let rawdata = fs.readFileSync(storedDataPath);
+  let dataToUpdate = JSON.parse(rawdata);
   let { temperature, humidity, co2, time } = data;
 
   // constrain size of storage json
-  if (storedData[dev_id].data.time.length === 10000) {
-    storedData[dev_id].data.temperature.splice(0, 1);
-    storedData[dev_id].data.humidity.splice(0, 1);
-    storedData[dev_id].data.time.splice(0, 1);
+  if (dataToUpdate[dev_id].data.time.length === 10000) {
+    dataToUpdate[dev_id].data.temperature.splice(0, 1);
+    dataToUpdate[dev_id].data.humidity.splice(0, 1);
+    dataToUpdate[dev_id].data.co2.splice(0, 1);
+    dataToUpdate[dev_id].data.time.splice(0, 1);
   }
 
-  storedData[dev_id].data.temperature.push(temperature);
-  storedData[dev_id].data.humidity.push(humidity);
-  storedData[dev_id].data.co2.push(co2);
-  storedData[dev_id].data.time.push(time);
+  dataToUpdate[dev_id].data.temperature.push(temperature);
+  dataToUpdate[dev_id].data.humidity.push(humidity);
+  dataToUpdate[dev_id].data.co2.push(co2);
+  dataToUpdate[dev_id].data.time.push(time);
 
   fs.writeFileSync(
     storedDataPath,
-    JSON.stringify(storedData),
+    JSON.stringify(dataToUpdate),
     "utf8",
     (data, err) => {
       if (err) {

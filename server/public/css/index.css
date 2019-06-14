@@ -51,16 +51,6 @@ header {
     margin-bottom: 2rem;
 }
 
-button, select{
-    background-color: #86C232;
-    border-radius: 25px;
-    border: none;
-    padding: 7px;
-}
-
-button:hover, select:hover {
-    background-color: #61892F;
-}
 
 form {
     padding: 50px;
@@ -87,6 +77,16 @@ span {
     transform: rotate(720deg);
     transition-duration: 3s;
 }
+
+.row > div > label:hover { 
+    background-color: #222629;
+}
+
+.row > div > label:active { 
+    background-color: #86C232;
+}
+
+
 
 @media screen and (max-width: 1135px) {
     #chartsDiv{

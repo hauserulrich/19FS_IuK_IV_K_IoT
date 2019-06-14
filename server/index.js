@@ -15,8 +15,6 @@ app.get("/", (req, res) =>
 
 // route to fetch all stored Data
 app.get("/api/v1/data", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*"); // for cors
-  res.header("Access-Control-Allow-Headers", "*"); // for cors
   console.log("All Data requested!");
   let rawdata = fs.readFileSync(storedDataPath);
   let dataToSend = JSON.parse(rawdata);

@@ -12,7 +12,9 @@ app.use(function(req, res, next) {
   let allowedOrigins = [
     "http://silvanknecht.ch",
     "http://silviojaeger.ch",
-    "http://localhost:2222"
+    "http://localhost:2222",
+    "http://www.silvanknecht.ch",
+    "http://www.silviojaeger.ch"
   ];
   let origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {

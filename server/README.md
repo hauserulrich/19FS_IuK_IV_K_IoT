@@ -1,6 +1,6 @@
 # Server
 ## Description
-The server is the connection between all parts of the system.  All information comes together and is processed. Firstly the server receives the data which was sent to the The Things Network by the Devices. In a further step the data is encoded and stored in a file. For now the file will accept 10'000 entries, after that older data is replaced! Lastly the data is sent to the MQTT Broker.
+The server is the connection between all parts of the system.  All information comes together and is processed. Firstly the server receives the data which was sent to the The Things Network by the Devices. In a further step the data is encoded and stored in a file. For now the file will accept 10'000 entries for every device and value, after that older data is replaced! Lastly the data is sent to the MQTT Broker.
 
 ## Preperations
 

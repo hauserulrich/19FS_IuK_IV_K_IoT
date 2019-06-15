@@ -12,12 +12,15 @@ before you can start the server, you need following parameters from your The Thi
 - TTN_APPID
 - TTN_ACCESSKEY
 
+### Edit Url
+you also need to change the url located in server/public/javascript/index.js. In case your not using any of the presented urls you also need to add your url to the allowed Origins Array in the server/index.js file.
+
 ## Start server
 
 To start the server you can use this script.bat. Don't forget to replace everything in <>. For development purposes install npm i -g nodemon or change it to node.
 
 ```
-start cmd /k "cd PATH_TO_SERVERFOLDER && c: && set TTN_APPID=<APPID> && set TTN_ACCESSKEY=<ACCESSKEY> && set PORT=3000 && nodemon run"
+start cmd /k "cd PATH_TO_SERVERFOLDER && c: && set TTN_APPID=<APPID> && set TTN_ACCESSKEY=<ACCESSKEY> && set PORT=2222 && nodemon run"
 ```
 ## API
 ### Page routes
